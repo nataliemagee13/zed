@@ -9,27 +9,30 @@
 </head>
 <body>
   <main>
+    <p class="eyebrow">A little soundtrack magic</p>
     <h1>Swiftie Song Finder</h1>
+    <p class="subtitle">A song for every era, a soundtrack for every mood.</p>
 
     <form>
-      <label for="mood">Choose a mood</label>
-      <select id="mood" name="mood">
+      <label for="mood-select">Choose a mood</label>
+      <select id="mood-select" name="mood">
         <option value="">Choose a mood</option>
         <option value="happy">Happy</option>
         <option value="sad">Sad</option>
         <option value="hype">Hype</option>
         <option value="love">Love</option>
       </select>
-      <button type="button">Recommend a song</button>
+      <button id="recommend-btn" type="button">Recommend a song</button>
     </form>
 
-    <p role="status" aria-live="polite"></p>
+    <p id="message" role="status" aria-live="polite"></p>
 
-    <section hidden>
+    <section id="result" hidden>
+      <p class="result-kicker">Your Swiftie song</p>
       <h2>Recommended song</h2>
-      <p>Title: <span></span></p>
-      <p>Album: <span></span></p>
-      <button type="button">Try again</button>
+      <p>Title: <span id="song-title"></span></p>
+      <p>Album: <span id="song-album"></span></p>
+      <button id="again-btn" type="button">Try again</button>
     </section>
   </main>
 </body>

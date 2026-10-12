@@ -1,1 +1,37 @@
-[]
+[
+  { "title": "Shake It Off", "album": "1989", "mood": "happy" },
+  { "title": "22", "album": "Red", "mood": "happy" },
+  { "title": "Paper Rings", "album": "Lover", "mood": "happy" },
+  { "title": "Welcome to New York", "album": "1989", "mood": "happy" },
+  { "title": "ME!", "album": "Lover", "mood": "happy" },
+  { "title": "You Belong With Me", "album": "Fearless", "mood": "happy" },
+  { "title": "Mine", "album": "Speak Now", "mood": "happy" },
+  { "title": "Karma", "album": "Midnights", "mood": "happy" },
+
+  { "title": "All Too Well", "album": "Red", "mood": "sad" },
+  { "title": "exile", "album": "folklore", "mood": "sad" },
+  { "title": "champagne problems", "album": "evermore", "mood": "sad" },
+  { "title": "Clean", "album": "1989", "mood": "sad" },
+  { "title": "Last Kiss", "album": "Speak Now", "mood": "sad" },
+  { "title": "the 1", "album": "folklore", "mood": "sad" },
+  { "title": "White Horse", "album": "Fearless", "mood": "sad" },
+  { "title": "Dear John", "album": "Speak Now", "mood": "sad" },
+
+  { "title": "Cruel Summer", "album": "Lover", "mood": "hype" },
+  { "title": "...Ready for It?", "album": "reputation", "mood": "hype" },
+  { "title": "Blank Space", "album": "1989", "mood": "hype" },
+  { "title": "Bejeweled", "album": "Midnights", "mood": "hype" },
+  { "title": "Look What You Made Me Do", "album": "reputation", "mood": "hype" },
+  { "title": "Style", "album": "1989", "mood": "hype" },
+  { "title": "I Knew You Were Trouble.", "album": "Red", "mood": "hype" },
+  { "title": "We Are Never Ever Getting Back Together", "album": "Red", "mood": "hype" },
+
+  { "title": "Lover", "album": "Lover", "mood": "love" },
+  { "title": "Enchanted", "album": "Speak Now", "mood": "love" },
+  { "title": "Love Story", "album": "Fearless", "mood": "love" },
+  { "title": "Daylight", "album": "Lover", "mood": "love" },
+  { "title": "invisible string", "album": "folklore", "mood": "love" },
+  { "title": "Mastermind", "album": "Midnights", "mood": "love" },
+  { "title": "Delicate", "album": "reputation", "mood": "love" },
+  { "title": "Sweet Nothing", "album": "Midnights", "mood": "love" }
+]
