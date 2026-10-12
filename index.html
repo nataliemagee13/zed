@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swiftie Song Finder</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Swiftie Song Finder</h1>
+
+    <form>
+      <label for="mood">Choose a mood</label>
+      <select id="mood" name="mood">
+        <option value="">Choose a mood</option>
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="hype">Hype</option>
+        <option value="love">Love</option>
+      </select>
+      <button type="button">Recommend a song</button>
+    </form>
+
+    <p role="status" aria-live="polite"></p>
+
+    <section hidden>
+      <h2>Recommended song</h2>
+      <p>Title: <span></span></p>
+      <p>Album: <span></span></p>
+      <button type="button">Try again</button>
+    </section>
+  </main>
+</body>
+</html>
