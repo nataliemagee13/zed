@@ -24,6 +24,8 @@
         <option value="sad">Sad</option>
         <option value="hype">Hype</option>
         <option value="love">Love</option>
+        <option value="nostalgic">Nostalgic</option>
+        <option value="revenge">Revenge</option>
       </select>
       <button id="recommend-btn" type="button">Recommend a song</button>
     </form>
@@ -35,7 +37,18 @@
       <span class="result-sparkle" aria-hidden="true">✦</span>
       <h2 id="song-title"></h2>
       <p class="album-line">from <span id="song-album"></span></p>
-      <button id="again-btn" type="button">Try again</button>
+      <div class="result-actions">
+        <button id="save-favorite-btn" type="button">Save to favorites</button>
+        <a id="spotify-link" href="#" target="_blank" rel="noopener">Listen on Spotify</a>
+        <button id="again-btn" type="button">Try again</button>
+      </div>
+    </section>
+
+    <section id="favorites-section" aria-labelledby="favorites-heading">
+      <p class="result-kicker">Your little collection</p>
+      <h2 id="favorites-heading">My favorites</h2>
+      <p id="favorites-empty">No favorites yet. Find your song!</p>
+      <ul id="favorites-list"></ul>
     </section>
   </main>
 </body>
