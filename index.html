@@ -27,7 +27,10 @@
         <option value="nostalgic">Nostalgic</option>
         <option value="revenge">Revenge</option>
       </select>
-      <button id="recommend-btn" type="button">Recommend a song</button>
+      <div class="recommend-actions">
+        <button id="recommend-btn" type="button">Recommend a song</button>
+        <button id="surprise-btn" type="button">Surprise me</button>
+      </div>
     </form>
 
     <p id="message" role="status" aria-live="polite"></p>
@@ -40,7 +43,10 @@
       <div class="result-actions">
         <button id="save-favorite-btn" type="button">Save to favorites</button>
         <a id="spotify-link" href="#" target="_blank" rel="noopener">Listen on Spotify</a>
-        <button id="share-song-btn" type="button">Share my song</button>
+        <div class="share-action">
+          <button id="share-song-btn" type="button" aria-describedby="share-hint">Share my song</button>
+          <small id="share-hint" class="share-hint">Copies a ready-to-share message</small>
+        </div>
         <button id="again-btn" type="button">Try again</button>
       </div>
     </section>
@@ -49,6 +55,7 @@
       <p class="result-kicker">Your little collection</p>
       <h2 id="favorites-heading">My favorites</h2>
       <p id="favorites-empty">No favorites yet. Find your song!</p>
+      <p id="era-stat" class="era-stat" hidden aria-live="polite"></p>
       <ul id="favorites-list"></ul>
     </section>
   </main>

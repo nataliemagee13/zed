@@ -24,7 +24,7 @@ html {
 }
 
 body {
-  align-items: center;
+  align-items: flex-start;
   background-color: var(--background);
   background-image: linear-gradient(90deg, var(--stripe) 2px, transparent 2px),
     linear-gradient(0deg, var(--stripe) 2px, transparent 2px),
@@ -107,6 +107,7 @@ main {
   max-width: 620px;
   padding: 52px clamp(24px, 7vw, 72px) 58px;
   position: relative;
+  margin: auto 0;
   text-align: center;
   transition: border-color 400ms ease, box-shadow 400ms ease;
   width: 100%;
@@ -136,6 +137,34 @@ main {
 
 .bracelet span:nth-child(2n) {
   background: var(--accent-soft);
+}
+
+.is-bouncing span {
+  animation: beadBounce 520ms ease both;
+}
+
+.is-bouncing span:nth-child(2) {
+  animation-delay: 45ms;
+}
+
+.is-bouncing span:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.is-bouncing span:nth-child(4) {
+  animation-delay: 135ms;
+}
+
+.is-bouncing span:nth-child(5) {
+  animation-delay: 180ms;
+}
+
+.is-bouncing span:nth-child(6) {
+  animation-delay: 225ms;
+}
+
+.is-bouncing span:nth-child(7) {
+  animation-delay: 270ms;
 }
 
 main::before,
@@ -232,6 +261,12 @@ select:focus {
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
+.recommend-actions {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1.25fr 1fr;
+}
+
 button {
   background: var(--accent);
   border: 0;
@@ -267,7 +302,6 @@ button:active {
 }
 
 #result {
-  animation: reveal 450ms ease both;
   background: linear-gradient(145deg, var(--surface) 0%, var(--surface-soft) 100%);
   border: 1px solid var(--card-accent);
   border-radius: 18px 18px 24px 24px;
@@ -276,6 +310,10 @@ button:active {
   padding: 32px 22px 24px;
   position: relative;
   transition: border-color 400ms ease, box-shadow 400ms ease;
+}
+
+.is-revealing {
+  animation: reveal 450ms ease both;
 }
 
 #result::before {
@@ -347,6 +385,17 @@ button:active {
   transform: translateY(-2px);
 }
 
+.share-action {
+  display: grid;
+  gap: 4px;
+}
+
+.share-hint {
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
 .result-actions #again-btn {
   margin-top: 0;
 }
@@ -380,6 +429,15 @@ button:disabled:hover {
   font-family: "Caveat", cursive;
   font-size: 1.25rem;
   margin: 0;
+  text-align: center;
+}
+
+.era-stat {
+  color: var(--accent-dark);
+  font-family: "Caveat", cursive;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 14px 0 0;
   text-align: center;
 }
 
@@ -443,6 +501,7 @@ button:disabled:hover {
 }
 
 @keyframes reveal {
+  /* Fade the card in while lifting it gently into place. */
   from {
     opacity: 0;
     transform: translateY(8px);
@@ -453,6 +512,17 @@ button:disabled:hover {
   }
 }
 
+@keyframes beadBounce {
+  /* Give each bracelet bead one soft, non-flashing hop. */
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-6px);
+  }
+}
+
 @media (max-width: 480px) {
   body {
     padding: 22px 12px;
@@ -460,6 +530,7 @@ button:disabled:hover {
 
   main {
     border-radius: 22px;
+    margin: 0;
     padding: 40px 18px 44px;
   }
 
@@ -483,6 +554,10 @@ button:disabled:hover {
   form {
     padding: 16px;
   }
+
+  .recommend-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -493,5 +568,10 @@ button:disabled:hover {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .is-revealing,
+  .is-bouncing span {
+    animation: none !important;
   }
 }

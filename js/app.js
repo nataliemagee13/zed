@@ -1,14 +1,18 @@
 const moodSelect = document.querySelector("#mood-select");
 const recommendButton = document.querySelector("#recommend-btn");
+const surpriseButton = document.querySelector("#surprise-btn");
 const againButton = document.querySelector("#again-btn");
 const message = document.querySelector("#message");
 const result = document.querySelector("#result");
+const bracelet = document.querySelector(".bracelet");
 const songTitle = document.querySelector("#song-title");
 const songAlbum = document.querySelector("#song-album");
 const saveFavoriteButton = document.querySelector("#save-favorite-btn");
 const spotifyLink = document.querySelector("#spotify-link");
 const shareSongButton = document.querySelector("#share-song-btn");
+const shareHint = document.querySelector("#share-hint");
 const favoritesEmpty = document.querySelector("#favorites-empty");
+const eraStat = document.querySelector("#era-stat");
 const favoritesList = document.querySelector("#favorites-list");
 
 let songs = [];
@@ -17,6 +21,7 @@ let currentIndex = 0;
 let songsFailedToLoad = false;
 let currentSong = null;
 let favorites = loadFavorites();
+let surpriseMode = false;
 
 const favoritesStorageKey = "swiftie-song-favorites";
 
@@ -50,9 +55,36 @@ function updateSaveButton() {
 	saveFavoriteButton.disabled = alreadySaved;
 }
 
+function updateEraStat() {
+	if (favorites.length === 0) {
+		eraStat.hidden = true;
+		return;
+	}
+
+	const albumCounts = {};
+	const albumLastFavorited = {};
+
+	favorites.forEach((favorite, index) => {
+		albumCounts[favorite.album] = (albumCounts[favorite.album] || 0) + 1;
+		albumLastFavorited[favorite.album] = index;
+	});
+
+	const eraAlbum = Object.keys(albumCounts).reduce((currentAlbum, album) => {
+		const hasMoreFavorites = albumCounts[album] > albumCounts[currentAlbum];
+		const isMostRecentTie = albumCounts[album] === albumCounts[currentAlbum] &&
+			albumLastFavorited[album] > albumLastFavorited[currentAlbum];
+
+		return hasMoreFavorites || isMostRecentTie ? album : currentAlbum;
+	});
+
+	eraStat.textContent = `You're in your ${eraAlbum} era ✨`;
+	eraStat.hidden = false;
+}
+
 function renderFavorites() {
 	favoritesList.replaceChildren();
 	favoritesEmpty.hidden = favorites.length > 0;
+	updateEraStat();
 
 	favorites.forEach((favorite, index) => {
 		const item = document.createElement("li");
@@ -120,6 +152,14 @@ function shuffleSongs(songList) {
 }
 
 // Put one song's details into the result section.
+function restartRevealAnimation() {
+	result.classList.remove("is-revealing");
+	bracelet.classList.remove("is-bouncing");
+	void result.offsetWidth;
+	result.classList.add("is-revealing");
+	bracelet.classList.add("is-bouncing");
+}
+
 function showSong(song) {
 	currentSong = song;
 	songTitle.textContent = song.title;
@@ -127,6 +167,7 @@ function showSong(song) {
 	const searchText = encodeURIComponent(`${song.title} Taylor Swift`);
 	spotifyLink.href = `https://open.spotify.com/search/${searchText}`;
 	result.hidden = false;
+	restartRevealAnimation();
 	message.textContent = "";
 	updateSaveButton();
 }
@@ -145,8 +186,10 @@ async function shareSong() {
 
 		await navigator.clipboard.writeText(shareText);
 		message.textContent = "Copied! Go share it ✨";
+		shareHint.textContent = "Copied! Ready to paste and share.";
 	} catch (error) {
 		message.textContent = "Couldn't copy. Try selecting the song name instead.";
+		shareHint.textContent = "Copy unavailable - select the song name instead.";
 	}
 }
 
@@ -155,7 +198,8 @@ function nextSong(showRefreshMessage = false) {
 	let startedNewMix = false;
 
 	if (currentIndex >= shuffledSongs.length) {
-		shuffledSongs = shuffleSongs(filterByMood(moodSelect.value));
+		const songPool = surpriseMode ? songs : filterByMood(moodSelect.value);
+		shuffledSongs = shuffleSongs(songPool);
 		currentIndex = 0;
 		startedNewMix = true;
 
@@ -192,12 +236,27 @@ async function recommendSong() {
 		return;
 	}
 
+	surpriseMode = false;
 	shuffledSongs = shuffleSongs(filterByMood(moodSelect.value));
 	currentIndex = 0;
 	nextSong();
 }
 
+async function surpriseSong() {
+	await songsLoadPromise;
+
+	if (songsFailedToLoad) {
+		return;
+	}
+
+	surpriseMode = true;
+	shuffledSongs = shuffleSongs(songs);
+	currentIndex = 0;
+	nextSong();
+}
+
 recommendButton.addEventListener("click", recommendSong);
+surpriseButton.addEventListener("click", surpriseSong);
 againButton.addEventListener("click", () => nextSong(true));
 saveFavoriteButton.addEventListener("click", () => {
 	if (!currentSong || favorites.some((favorite) =>
