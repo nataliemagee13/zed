@@ -9,6 +9,9 @@
 </head>
 <body>
   <main>
+    <div class="bracelet" aria-hidden="true">
+      <span>S</span><span>W</span><span>I</span><span>F</span><span>T</span><span>I</span><span>E</span>
+    </div>
     <p class="eyebrow">A little soundtrack magic</p>
     <h1>Swiftie Song Finder</h1>
     <p class="subtitle">A song for every era, a soundtrack for every mood.</p>
@@ -29,9 +32,9 @@
 
     <section id="result" hidden>
       <p class="result-kicker">Your Swiftie song</p>
-      <h2>Recommended song</h2>
-      <p>Title: <span id="song-title"></span></p>
-      <p>Album: <span id="song-album"></span></p>
+      <span class="result-sparkle" aria-hidden="true">✦</span>
+      <h2 id="song-title"></h2>
+      <p class="album-line">from <span id="song-album"></span></p>
       <button id="again-btn" type="button">Try again</button>
     </section>
   </main>
