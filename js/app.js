@@ -7,6 +7,7 @@ const songTitle = document.querySelector("#song-title");
 const songAlbum = document.querySelector("#song-album");
 const saveFavoriteButton = document.querySelector("#save-favorite-btn");
 const spotifyLink = document.querySelector("#spotify-link");
+const shareSongButton = document.querySelector("#share-song-btn");
 const favoritesEmpty = document.querySelector("#favorites-empty");
 const favoritesList = document.querySelector("#favorites-list");
 
@@ -130,6 +131,25 @@ function showSong(song) {
 	updateSaveButton();
 }
 
+async function shareSong() {
+	if (!currentSong) {
+		return;
+	}
+
+	const shareText = `Today's Swiftie song: ${currentSong.title} (${currentSong.album}) 🫶 found on Swiftie Song Finder`;
+
+	try {
+		if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
+			throw new Error("Clipboard is unavailable");
+		}
+
+		await navigator.clipboard.writeText(shareText);
+		message.textContent = "Copied! Go share it ✨";
+	} catch (error) {
+		message.textContent = "Couldn't copy. Try selecting the song name instead.";
+	}
+}
+
 // Show the next song, reshuffling after every song has been seen.
 function nextSong(showRefreshMessage = false) {
 	let startedNewMix = false;
@@ -191,6 +211,7 @@ saveFavoriteButton.addEventListener("click", () => {
 	renderFavorites();
 	updateSaveButton();
 });
+shareSongButton.addEventListener("click", shareSong);
 // Keep the visual theme in sync with the mood selected by the user.
 moodSelect.addEventListener("change", () => {
 	document.body.dataset.mood = moodSelect.value;
